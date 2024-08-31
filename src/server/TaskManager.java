@@ -160,6 +160,10 @@ public class TaskManager {
 
     public void clearSubTask() { //Удалить сабтакски
         taskSub.clear();
+        for (Epic epic : tasksEpic.values()) {
+            epic.getSabTaskIds().clear();
+            updateTask(epic);
+        }
     }
 
     public void clearEpic() { // Удалить епики + сабтакски
