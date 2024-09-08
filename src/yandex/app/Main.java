@@ -1,11 +1,12 @@
-import Model.Epic;
-import Model.Status;
-import Model.SubTask;
-import Model.Task;
-import server.TaskManager;
+package yandex.app;
 
-import static Model.Status.IN_PROGRESS;
-import static Model.Status.NEW;
+import yandex.app.Model.Epic;
+import yandex.app.Model.SubTask;
+import yandex.app.Model.Task;
+import yandex.app.server.TaskManager;
+
+import static yandex.app.Model.Status.IN_PROGRESS;
+import static yandex.app.Model.Status.NEW;
 
 public class Main {
 
@@ -57,11 +58,15 @@ public class Main {
         // ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ УДАЛИТЬ САБТАКС ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ
 
         System.out.println();
-        System.out.println("вывод обновленных епиков - " + taskManager.getEpics());
-
+        System.out.println("вывод обновленных епиков - ");
+        for (Epic epic : taskManager.getEpics().values()) {
+            System.out.println(epic);
+        }
         System.out.println();
-        System.out.println("вывод обновленных сабтасков - " + taskManager.getSubTasks());
-
+        System.out.println("вывод обновленных сабтасков - ");
+        for (SubTask subTask : taskManager.getSubTasks().values()) {
+            System.out.println(subTask);
+        }
         // ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ общий метод по поиску ID ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ
 
         System.out.println();

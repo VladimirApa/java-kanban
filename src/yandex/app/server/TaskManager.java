@@ -1,9 +1,9 @@
-package server;
+package yandex.app.server;
 
-import Model.Epic;
-import Model.Status;
-import Model.SubTask;
-import Model.Task;
+import yandex.app.Model.Epic;
+import yandex.app.Model.Status;
+import yandex.app.Model.SubTask;
+import yandex.app.Model.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -103,19 +103,19 @@ public class TaskManager {
         return null;
     }
 
-    public Task searchTask(int id) {// Поиск задачи по айди в Model.Task
+    public Task searchTask(int id) {// Поиск задачи по айди в yandex.app.Model.Task
         return tasks.get(id);
     }
 
-    public SubTask searchSub(int id) {// Поиск задачи по айди в Model.Task
+    public SubTask searchSub(int id) {// Поиск задачи по айди в yandex.app.Model.Task
         return taskSub.get(id);
     }
 
-    public Epic searchEpic(int id) {// Поиск задачи по айди в Model.Task
+    public Epic searchEpic(int id) {// Поиск задачи по айди в yandex.app.Model.Task
         return tasksEpic.get(id);
     }
 
-    public boolean removeTask(int id) { // удалить по айди Model.Task
+    public boolean removeTask(int id) { // удалить по айди yandex.app.Model.Task
         Task task = tasks.remove(id);
         if (task != null) {
             return true;
@@ -124,7 +124,7 @@ public class TaskManager {
         }
     }
 
-    public boolean removeSubTask(int id) { // удалить по айди Model.SubTask
+    public boolean removeSubTask(int id) { // удалить по айди yandex.app.Model.SubTask
         SubTask subTask = taskSub.remove(id);
         if (subTask != null) {
             return true;
@@ -133,7 +133,7 @@ public class TaskManager {
         }
     }
 
-    public boolean removeEpic(int id) { // удалить по айди Model.Epic
+    public boolean removeEpic(int id) { // удалить по айди yandex.app.Model.Epic
         Epic epic = tasksEpic.remove(id);
         if (epic != null) {
             return true;
