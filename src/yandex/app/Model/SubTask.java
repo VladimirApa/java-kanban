@@ -3,8 +3,8 @@ package yandex.app.Model;
 public class SubTask extends Task {
     private final int epicId;
 
-    public SubTask(String name, Status status, String description, int epicId) {
-        super(name, status, description);
+    public SubTask(String name, String description, int epicId) {
+        super(name, description);
         this.epicId = epicId;
     }
 

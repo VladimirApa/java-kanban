@@ -15,23 +15,23 @@ public class Main {
         System.out.println("Делай делай делай!");
         System.out.println("А когда не делали!");
 
-        Task t1 = new Task("Начать ремонт", NEW, "Развестись с женой");
-        Task t2 = new Task("Найти бригадира", NEW, "Довести бригадира");
+        Task t1 = new Task("Начать ремонт", "Развестись с женой");
+        Task t2 = new Task("Найти бригадира", "Довести бригадира");
         taskManager.addTask(t1);
         taskManager.addTask(t2);
-        for (Task task : taskManager.getTasks().values()) {
+        for (Task task : taskManager.getTasks()) {
             System.out.println(task);
         }
         // ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ
 
-        Epic e11 = taskManager.addEpic(new Epic("Концерт", NEW, "Научится кидать артистов на бабки."));
+        Epic e11 = taskManager.addEpic(new Epic("Концерт", "Научится кидать артистов на бабки."));
 
-        SubTask s1 = taskManager.addSubTask(new SubTask("Найти актеров", NEW, "Кинуть актеров", e11.getId()));
-        SubTask s2 = taskManager.addSubTask(new SubTask("Собрать деньги", NEW, "Забрать все себе", e11.getId()));
+        SubTask s1 = taskManager.addSubTask(new SubTask("Найти актеров", "Кинуть актеров", e11.getId()));
+        SubTask s2 = taskManager.addSubTask(new SubTask("Собрать деньги", "Забрать все себе", e11.getId()));
         e11.addNewSubTask(s1.getId());
         e11.addNewSubTask(s2.getId());
 
-        for (Epic epic : taskManager.getEpics().values()) {
+        for (Epic epic : taskManager.getEpics()) {
             System.out.println("\n\n" + epic);
         }
         for (SubTask subTask : taskManager.getSubTasks().values()) {
@@ -39,7 +39,7 @@ public class Main {
         }
         // ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ ОБНОВЛЕНИЕ ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ
 
-        SubTask s500 = taskManager.addSubTask(new SubTask("Продавать", IN_PROGRESS, "Кукурузу", e11.getId()));
+        SubTask s500 = taskManager.addSubTask(new SubTask("Продавать", "Кукурузу", e11.getId()));
         System.out.println();
         System.out.println("Смотрим обновились ли наши идеи: ");
         for (SubTask subTask : taskManager.getSubTasks().values()) {

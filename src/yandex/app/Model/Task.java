@@ -9,7 +9,7 @@ public class Task {
     private int id;
 
 
-    public Task(String name, Status status, String description) {// общий конструктор
+    public Task(String name, String description) {// общий конструктор
         this.name = name;
         this.description = description;
         this.status = Status.NEW;
