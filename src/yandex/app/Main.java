@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
         TaskManager taskManager = new TaskManager();
         System.out.println("Делай делай делай!");
-        System.out.println("А когда не делали!");
+        System.out.println("А когда не делали?");
 
         Task t1 = new Task("Начать ремонт", "Развестись с женой");
         Task t2 = new Task("Найти бригадира", "Довести бригадира");
@@ -34,7 +34,7 @@ public class Main {
         for (Epic epic : taskManager.getEpics()) {
             System.out.println("\n\n" + epic);
         }
-        for (SubTask subTask : taskManager.getSubTasks().values()) {
+        for (SubTask subTask : taskManager.getSubTasks()) {
             System.out.println(subTask);
         }
         // ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ ОБНОВЛЕНИЕ ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ
@@ -42,29 +42,29 @@ public class Main {
         SubTask s500 = taskManager.addSubTask(new SubTask("Продавать", "Кукурузу", e11.getId()));
         System.out.println();
         System.out.println("Смотрим обновились ли наши идеи: ");
-        for (SubTask subTask : taskManager.getSubTasks().values()) {
+        for (SubTask subTask : taskManager.getSubTasks()) {
             System.out.println(subTask);
         }
         System.out.println();
 
         // ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ УДАЛИТЬ САБТАКС ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ
 
-        taskManager.removeSubTask(6);
+        taskManager.removeSubTask(4);
         System.out.println();
         System.out.println("Должны остатся 2 задачи ");
-        for (SubTask subTask : taskManager.getSubTasks().values()) {
+        for (SubTask subTask : taskManager.getSubTasks()) {
             System.out.println(subTask);
         }
         // ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ УДАЛИТЬ САБТАКС ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ
 
         System.out.println();
         System.out.println("вывод обновленных епиков - ");
-        for (Epic epic : taskManager.getEpics().values()) {
+        for (Epic epic : taskManager.getEpics()) {
             System.out.println(epic);
         }
         System.out.println();
         System.out.println("вывод обновленных сабтасков - ");
-        for (SubTask subTask : taskManager.getSubTasks().values()) {
+        for (SubTask subTask : taskManager.getSubTasks()) {
             System.out.println(subTask);
         }
         // ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ общий метод по поиску ID ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ
