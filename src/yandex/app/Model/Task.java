@@ -39,11 +39,11 @@ public class Task {
         this.status = status;
     }
 
-    public int getId() {
+    public int getId() { //id
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(int id) { // id
         this.id = id;
     }
 

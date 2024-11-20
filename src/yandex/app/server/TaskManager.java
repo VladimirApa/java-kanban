@@ -156,7 +156,7 @@ public class TaskManager {
         return new ArrayList<>(taskSub.values());
     }
 
-    public void clearTask() { //Удалить таск
+    public void clearTask() { //full clear Task
         tasks.clear();
     }
 
