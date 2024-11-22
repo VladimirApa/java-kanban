@@ -1,12 +1,9 @@
 package yandex.app;
 
-import yandex.app.Model.Epic;
-import yandex.app.Model.SubTask;
-import yandex.app.Model.Task;
-import yandex.app.server.TaskManager;
-
-import static yandex.app.Model.Status.IN_PROGRESS;
-import static yandex.app.Model.Status.NEW;
+import yandex.app.model.Epic;
+import yandex.app.model.SubTask;
+import yandex.app.model.Task;
+import yandex.app.manager.TaskManager;
 
 public class Main {
 

@@ -1,8 +1,8 @@
-package yandex.app.Model;
+package yandex.app.model;
 
 import java.util.ArrayList;
 
-public class Epic extends Task {
+public class Epic extends yandex.app.model.Task {
 
     private final ArrayList<Integer> subTaskIds = new ArrayList<>();
 

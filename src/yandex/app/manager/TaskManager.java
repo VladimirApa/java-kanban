@@ -1,9 +1,9 @@
-package yandex.app.server;
+package yandex.app.manager;
 
-import yandex.app.Model.Epic;
-import yandex.app.Model.Status;
-import yandex.app.Model.SubTask;
-import yandex.app.Model.Task;
+import yandex.app.model.Epic;
+import yandex.app.model.TaskStatus;
+import yandex.app.model.SubTask;
+import yandex.app.model.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -65,11 +65,7 @@ public class TaskManager {
         calculateEpicStatus(epic);
     }
 
-    public void calculateEpicStatus(Epic epic) { //Обновление статуса
-        /*if (epic.getSabTaskIds().isEmpty()) {
-            epic.setStat(Status.NEW);
-            return;
-        }*/
+    private void calculateEpicStatus(Epic epic) { //Обновление статуса
         int newBiba = 0; // Новый
         int doneBoba = 0; // Уже повидавший
         ArrayList<SubTask> sabList = new ArrayList<>();
@@ -77,18 +73,18 @@ public class TaskManager {
             sabList.add(taskSub.get(id));
         }
         for (SubTask subTask : sabList) {
-            if (subTask.getStat() == Status.NEW) {
+            if (subTask.getStat() == TaskStatus.NEW) {
                 newBiba++;
-            } else if (subTask.getStat() == Status.DONE) {
+            } else if (subTask.getStat() == TaskStatus.DONE) {
                 doneBoba++;
             }
         }
         if (taskSub.isEmpty() || newBiba == taskSub.size()) {
-            epic.setStat(Status.NEW);
+            epic.setStat(TaskStatus.NEW);
         } else if (doneBoba == taskSub.size()) {
-            epic.setStat(Status.DONE);
+            epic.setStat(TaskStatus.DONE);
         } else {
-            epic.setStat(Status.IN_PROGRESS);
+            epic.setStat(TaskStatus.IN_PROGRESS);
         }
     }
 

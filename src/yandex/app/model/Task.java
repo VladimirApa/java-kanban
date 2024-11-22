@@ -1,18 +1,18 @@
-package yandex.app.Model;
+package yandex.app.model;
 
 import java.util.Objects;
 
 public class Task {
     private String name;
     private String description;
-    private Status status;
+    private TaskStatus status;
     private int id;
 
 
     public Task(String name, String description) {// общий конструктор
         this.name = name;
         this.description = description;
-        this.status = Status.NEW;
+        this.status = TaskStatus.NEW;
     }
 
     public void setName(String name) {
@@ -31,11 +31,11 @@ public class Task {
         this.description = description;
     }
 
-    public Status getStat() {
+    public TaskStatus getStat() {
         return status;
     }
 
-    public void setStat(Status status) {
+    public void setStat(TaskStatus status) {
         this.status = status;
     }
 
