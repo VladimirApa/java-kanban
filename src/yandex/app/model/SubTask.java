@@ -13,4 +13,14 @@ public class SubTask extends yandex.app.model.Task {
     }
 
 
+    @Override
+    public String toString() {
+        return "SubTask{" +
+                "epicId=" + epicId +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", status=" + status +
+                ", id=" + id +
+                '}';
+    }
 }

@@ -3,10 +3,10 @@ package yandex.app.model;
 import java.util.Objects;
 
 public class Task {
-    private String name;
-    private String description;
-    private TaskStatus status;
-    private int id;
+    protected String name;
+    protected String description;
+    protected TaskStatus status;
+    protected int id;
 
 
     public Task(String name, String description) {// общий конструктор
@@ -31,11 +31,11 @@ public class Task {
         this.description = description;
     }
 
-    public TaskStatus getStat() {
+    public TaskStatus getStatus() {
         return status;
     }
 
-    public void setStat(TaskStatus status) {
+    public void setStatus(TaskStatus status) {
         this.status = status;
     }
 
@@ -60,12 +60,13 @@ public class Task {
         return Objects.hashCode(id);
     }
 
+
     @Override
     public String toString() {
         return "Task{" +
                 "name='" + name + '\'' +
-                ", title='" + description + '\'' +
-                ", stat=" + status +
+                ", description='" + description + '\'' +
+                ", status=" + status +
                 ", id=" + id +
                 '}';
     }

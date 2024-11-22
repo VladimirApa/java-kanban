@@ -26,12 +26,15 @@ public class Epic extends yandex.app.model.Task {
         subTaskIds.remove(id);
     }
 
+
     @Override
     public String toString() {
         return "Epic{" +
-                "sabTaskIds=" + subTaskIds +
+                "id=" + id +
+                ", status=" + status +
+                ", description='" + description + '\'' +
+                ", name='" + name + '\'' +
+                ", subTaskIds=" + subTaskIds +
                 '}';
     }
-
-
 }

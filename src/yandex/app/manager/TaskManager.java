@@ -73,18 +73,18 @@ public class TaskManager {
             sabList.add(taskSub.get(id));
         }
         for (SubTask subTask : sabList) {
-            if (subTask.getStat() == TaskStatus.NEW) {
+            if (subTask.getStatus() == TaskStatus.NEW) {
                 newBiba++;
-            } else if (subTask.getStat() == TaskStatus.DONE) {
+            } else if (subTask.getStatus() == TaskStatus.DONE) {
                 doneBoba++;
             }
         }
         if (taskSub.isEmpty() || newBiba == taskSub.size()) {
-            epic.setStat(TaskStatus.NEW);
+            epic.setStatus(TaskStatus.NEW);
         } else if (doneBoba == taskSub.size()) {
-            epic.setStat(TaskStatus.DONE);
+            epic.setStatus(TaskStatus.DONE);
         } else {
-            epic.setStat(TaskStatus.IN_PROGRESS);
+            epic.setStatus(TaskStatus.IN_PROGRESS);
         }
     }
 
