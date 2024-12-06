@@ -1,171 +1,54 @@
 package yandex.app.manager;
 
 import yandex.app.model.Epic;
-import yandex.app.model.TaskStatus;
 import yandex.app.model.SubTask;
 import yandex.app.model.Task;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 
-public class TaskManager {
+public interface TaskManager {
+    void addTask(Task task);
 
-    private final HashMap<Integer, Task> tasks;
-    private final HashMap<Integer, SubTask> taskSub;
-    private final HashMap<Integer, Epic> tasksEpic;
-    private int id = 1;
+    void addSubTask(SubTask subtask);
 
+    void addEpic(Epic epic);
 
-    public TaskManager() {
-        tasks = new HashMap<>();
-        taskSub = new HashMap<>();
-        tasksEpic = new HashMap<>();
-    }
+    void updateTask(Task task);
 
-    public Task addTask(Task task) { // добавить задачи
-        task.setId(id++);
-        tasks.put(task.getId(), task);
-        return task;
-    }
+    void updateEpic(Epic epic);
 
-    public SubTask addSubTask(SubTask subtask) {
-        subtask.setId(id++);
-        taskSub.put(subtask.getId(), subtask);
-        Epic epicTask = tasksEpic.get(subtask.getEpicId());
-        epicTask.addNewSubTask(subtask.getId());
-        calculateEpicStatus(tasksEpic.get(subtask.getEpicId()));
-        return subtask;
-    }
+    void updateSubTask(SubTask subTask);
 
-    public Epic addEpic(Epic epic) {
-        epic.setId(id++);
-        tasksEpic.put(epic.getId(), epic);
-        return epic;
-    }
+    void calculateEpicStatus(Epic epic);
 
-    public void updateTask(Task task) { // Обновить задачу Таск
-        tasks.put(task.getId(), task);
-    }
+    Task allSearchID(int id);
 
-    public void updateEpic(Epic epic) { //Обновить задачу эпик
-        Epic saved = tasksEpic.get(epic.getId());
-        if (saved == null) {
-            return;
-        }
-        saved.setName(epic.getName());
-        saved.setDescription(epic.getName());
-    }
+    Task searchTask(int id);
 
-    public void updateSubTask(SubTask subTask) { // Обновить задачу Саб таск
-        Epic epic = tasksEpic.get(subTask.getEpicId());
-        if (epic == null) {
-            return;
-        }
-        taskSub.put(subTask.getId(), subTask);
-        calculateEpicStatus(epic);
-    }
+    SubTask searchSub(int id);
 
-    private void calculateEpicStatus(Epic epic) { //Обновление статуса
-        int newBiba = 0; // Новый
-        int doneBoba = 0; // Уже повидавший
-        ArrayList<SubTask> sabList = new ArrayList<>();
-        for (Integer id : epic.getSubTaskIds()) {
-            sabList.add(taskSub.get(id));
-        }
-        for (SubTask subTask : sabList) {
-            if (subTask.getStatus() == TaskStatus.NEW) {
-                newBiba++;
-            } else if (subTask.getStatus() == TaskStatus.DONE) {
-                doneBoba++;
-            }
-        }
-        if (taskSub.isEmpty() || newBiba == taskSub.size()) {
-            epic.setStatus(TaskStatus.NEW);
-        } else if (doneBoba == taskSub.size()) {
-            epic.setStatus(TaskStatus.DONE);
-        } else {
-            epic.setStatus(TaskStatus.IN_PROGRESS);
-        }
-    }
+    Epic searchEpic(int id);
 
-    public Task allSearchID(int id) { // ОБЩИЙ МЕТОД ПО ПОИСКУ ID
-        Task result = tasks.get(id);
-        SubTask resultSub = taskSub.get(id);
-        Epic resultEpic = tasksEpic.get(id);
-        if (result != null) {
-            return result;
-        } else if (resultSub != null) {
-            return resultSub;
-        } else if (resultEpic != null) {
-            return resultEpic;
-        }
-        return null;
-    }
+    boolean removeTask(int id);
 
-    public Task searchTask(int id) {// Поиск задачи по айди в yandex.app.Model.Task
-        return tasks.get(id);
-    }
+    void removeSubTask(int id);
 
-    public SubTask searchSub(int id) {// Поиск задачи по айди в yandex.app.Model.Task
-        return taskSub.get(id);
-    }
+    void removeEpic(int id);
 
-    public Epic searchEpic(int id) {// Поиск задачи по айди в yandex.app.Model.Task
-        return tasksEpic.get(id);
-    }
+    ArrayList<Task> getTasks();
 
-    public boolean removeTask(int id) { // удалить по айди yandex.app.Model.Task
-        Task task = tasks.remove(id);
-        if (task != null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    ArrayList<Epic> getEpics();
 
-    public void removeSubTask(int id) { // удалить по айди yandex.app.Model.SubTask
-        final SubTask subTask = taskSub.remove(id);
-        if (subTask == null) {
-            return;
-        }
-        final Epic epicTask = tasksEpic.get(subTask.getEpicId());
-        epicTask.removeSubTaskIds(id);
-        updateEpic(epicTask);
-    }
+    ArrayList<SubTask> getSubTasks();
 
-    public void removeEpic(int id) { // удалить по айди yandex.app.Model.Epic
-        final Epic epic = tasksEpic.remove(id);
-        for (Integer subtaskId : epic.getSubTaskIds()) {
-            taskSub.remove(subtaskId);
-        }
-    }
+    ArrayList<SubTask> getEpicSab(int epicId);
 
-    public ArrayList<Task> getTasks() { //Для вывода
-        return new ArrayList<>(tasks.values());
-    }
+    List<Task> getHistory();
 
-    public ArrayList<Epic> getEpics() { //Для вывода
-        return new ArrayList<>(tasksEpic.values());
-    }
+    void clearTask();
 
-    public ArrayList<SubTask> getSubTasks() { //Для вывода
-        return new ArrayList<>(taskSub.values());
-    }
+    void clearSubTask();
 
-    public void clearTask() { //full clear Task
-        tasks.clear();
-    }
-
-    public void clearSubTask() { //Удалить сабтакски
-        taskSub.clear();
-        for (Epic epic : tasksEpic.values()) {
-            epic.getSubTaskIds().clear();
-            calculateEpicStatus(epic);
-        }
-    }
-
-    public void clearEpic() { // Удалить епики + сабтакски
-        tasksEpic.clear();
-        taskSub.clear();
-    }
+    void clearEpic();
 }
