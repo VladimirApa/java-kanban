@@ -1,17 +1,15 @@
 package yandex.app;
 
-import yandex.app.model.Epic;
-import yandex.app.model.SubTask;
-import yandex.app.model.Task;
-import yandex.app.manager.TaskManager;
+import yandex.app.manager.*;
+import yandex.app.model.*;
 
 public class Main {
 
     public static void main(String[] args) {
-        TaskManager taskManager = new TaskManager();
+        TaskManager taskManager = Managers.getDefault();
         System.out.println("Делай делай делай!");
         System.out.println("А когда не делали?");
-
+        printAllTasks(taskManager);
         Task t1 = new Task("Начать ремонт", "Развестись с женой");
         Task t2 = new Task("Найти бригадира", "Довести бригадира");
         taskManager.addTask(t1);
@@ -21,12 +19,10 @@ public class Main {
         }
         // ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ
 
-        Epic e11 = taskManager.addEpic(new Epic("Концерт", "Научится кидать артистов на бабки."));
+        taskManager.addEpic(new Epic("Концерт", "Научится кидать артистов на бабки."));
 
-        SubTask s1 = taskManager.addSubTask(new SubTask("Найти актеров", "Кинуть актеров", e11.getId()));
-        SubTask s2 = taskManager.addSubTask(new SubTask("Собрать деньги", "Забрать все себе", e11.getId()));
-        e11.addNewSubTask(s1.getId());
-        e11.addNewSubTask(s2.getId());
+        taskManager.addSubTask(new SubTask("Найти актеров", "Кинуть актеров", 3));
+        taskManager.addSubTask(new SubTask("Собрать деньги", "Забрать все себе", 4));
 
         for (Epic epic : taskManager.getEpics()) {
             System.out.println("\n\n" + epic);
@@ -35,8 +31,7 @@ public class Main {
             System.out.println(subTask);
         }
         // ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ ОБНОВЛЕНИЕ ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ
-
-        SubTask s500 = taskManager.addSubTask(new SubTask("Продавать", "Кукурузу", e11.getId()));
+        taskManager.addSubTask(new SubTask("Продавать", "Кукурузу", 5));
         System.out.println();
         System.out.println("Смотрим обновились ли наши идеи: ");
         for (SubTask subTask : taskManager.getSubTasks()) {
@@ -48,7 +43,7 @@ public class Main {
 
         taskManager.removeSubTask(4);
         System.out.println();
-        System.out.println("Должны остатся 2 задачи ");
+        System.out.println("Оставшиеся задачи ");
         for (SubTask subTask : taskManager.getSubTasks()) {
             System.out.println(subTask);
         }
@@ -80,6 +75,40 @@ public class Main {
         // ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ Проверка удаления ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ
 
 
+    }
+
+    private static void printAllTasks(TaskManager manager) {
+        manager.addTask(new Task("Почитать манхву ", "Solo Leveling"));
+        manager.addTask(new Task("Почитать манхву ", "Всеведуйщий читатель"));
+        manager.addEpic(new Epic("Работа", "Опять работать?"));
+        manager.addSubTask(new SubTask("Посмотреть аниме: ", "Убийца гоблинов", 2));
+        manager.addSubTask(new SubTask("Посмотреть аниме: ", "Код Гиас", 2));
+        manager.addEpic(new Epic("Заниматься спортом", "Чтобы тело не затекало :D"));
+        manager.addSubTask(new SubTask("Посмотреть аниме: ", "КРД", 3));
+        manager.addSubTask(new SubTask("Посмотреть аниме: ", "Что то новое?", 3));
+
+
+        System.out.println("Задачи: ");
+        for (Task task : manager.getTasks()) {
+            System.out.println(task);
+        }
+        System.out.println("Эпики: ");
+        for (Task epic : manager.getEpics()) {
+            System.out.println(epic);
+
+            for (Task task : manager.getEpicSab(epic.getId())) {
+                System.out.println("--> " + task);
+            }
+        }
+        System.out.println("Подзадачи: ");
+        for (Task subtask : manager.getSubTasks()) {
+            System.out.println(subtask);
+        }
+
+        System.out.println("История:");
+        for (Task task : manager.getHistory()) {
+            System.out.println(task);
+        }
     }
 }
 
