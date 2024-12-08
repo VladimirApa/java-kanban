@@ -20,15 +20,13 @@ public interface TaskManager {
 
     void updateSubTask(SubTask subTask);
 
-    void calculateEpicStatus(Epic epic);
-
     Task allSearchID(int id);
 
-    Task searchTask(int id);
+    Task getTaskById(int id);
 
-    SubTask searchSub(int id);
+    SubTask getSubTaskById(int id);
 
-    Epic searchEpic(int id);
+    Epic getEpicById(int id);
 
     boolean removeTask(int id);
 

@@ -10,7 +10,7 @@ public class InMemoryTaskManager implements TaskManager {
     private final HashMap<Integer, Task> tasks;
     private final HashMap<Integer, SubTask> taskSub;
     private final HashMap<Integer, Epic> tasksEpic;
-    HistoryManager historyManager = Managers.getDefaultHistory();
+    private final HistoryManager historyManager = Managers.getDefaultHistory();
     private int id = 1;
 
 
@@ -24,7 +24,6 @@ public class InMemoryTaskManager implements TaskManager {
     public void addTask(Task task) { // добавить задачи
         task.setId(id++);
         tasks.put(task.getId(), task);
-
     }
 
     @Override
@@ -71,8 +70,7 @@ public class InMemoryTaskManager implements TaskManager {
         calculateEpicStatus(epic);
     }
 
-    @Override
-    public void calculateEpicStatus(Epic epic) { //Обновление статуса
+    private void calculateEpicStatus(Epic epic) { //Обновление статуса
         int newBiba = 0; // Новый
         int doneBoba = 0; // Уже повидавший
         ArrayList<SubTask> sabList = new ArrayList<>();
@@ -111,18 +109,25 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public Task searchTask(int id) {// Поиск задачи по айди в yandex.app.Model.Task
-        return tasks.get(id);
+    public Task getTaskById(int id) {// Поиск задачи по айди в yandex.app.Model.Task
+        Task task = tasks.get(id);
+        historyManager.addTaskHistory(task);
+        return tasks.get(id) != null ? tasks.get(id) : null;
+
     }
 
     @Override
-    public SubTask searchSub(int id) {// Поиск задачи по айди в yandex.app.Model.Task
-        return taskSub.get(id);
+    public SubTask getSubTaskById(int id) {// Поиск задачи по айди в yandex.app.Model.Task
+        SubTask subTask = taskSub.get(id);
+        historyManager.addTaskHistory(subTask);
+        return taskSub.get(id) != null ? taskSub.get(id) : null;
     }
 
     @Override
-    public Epic searchEpic(int id) {// Поиск задачи по айди в yandex.app.Model.Task
-        return tasksEpic.get(id);
+    public Epic getEpicById(int id) {// Поиск задачи по айди в yandex.app.Model.Task
+        Epic epic = tasksEpic.get(id);
+        historyManager.addTaskHistory(epic);
+        return tasksEpic.get(id) != null ? tasksEpic.get(id) : null;
     }
 
     @Override
